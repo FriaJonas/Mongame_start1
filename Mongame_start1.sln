@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongame_start1", "Mongame_start1\Mongame_start1.csproj", "{F667A249-DED7-4E60-9EA9-FF9E6BB3E46C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F667A249-DED7-4E60-9EA9-FF9E6BB3E46C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F667A249-DED7-4E60-9EA9-FF9E6BB3E46C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F667A249-DED7-4E60-9EA9-FF9E6BB3E46C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F667A249-DED7-4E60-9EA9-FF9E6BB3E46C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11834CD1-86B3-4479-BA8C-EC5B6F3356EB}
+	EndGlobalSection
+EndGlobal
