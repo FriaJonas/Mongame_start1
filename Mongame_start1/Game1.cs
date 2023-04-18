@@ -99,7 +99,7 @@ namespace Mongame_start1
             if (IsJump)
             {
                 SpaceShip2.Y += (int)Velocity.Y;
-                if (SpaceShip2.Y <= 600)
+                if (SpaceShip2.Y <= 400)
                 {
                     Velocity.Y = 10;
                 }
