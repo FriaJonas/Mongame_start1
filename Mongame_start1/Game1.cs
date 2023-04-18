@@ -18,6 +18,8 @@ namespace Mongame_start1
         private Rectangle SpaceShip;
 
         private Rectangle SpaceShip2;
+        private Vector2 Velocity;
+        private bool IsJump = false;
 
         SpriteFont Font;
 
@@ -42,8 +44,6 @@ namespace Mongame_start1
 
             _graphics.ApplyChanges();
 
-            SpaceShip = new Rectangle(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 120,100,100);
-            SpaceShip2 = new Rectangle(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 620, 100, 100);
             base.Initialize();
             
         }
@@ -58,6 +58,10 @@ namespace Mongame_start1
             //Laddar in fonten
             Font = Content.Load<SpriteFont>("Font");
 
+
+
+            SpaceShip = new Rectangle(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 600, 100, 100);
+            SpaceShip2 = new Rectangle(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 100, 100, 100);
             // TODO: use this.Content to load your game content here
         }
 
@@ -88,6 +92,22 @@ namespace Mongame_start1
             {
                 points++;
             }
+            if (ks.IsKeyDown(Keys.Space)){
+                IsJump = true;
+                Velocity.Y = -10;
+            }
+            if (IsJump)
+            {
+                SpaceShip2.Y += (int)Velocity.Y;
+                if (SpaceShip2.Y <= 600)
+                {
+                    Velocity.Y = 10;
+                }
+                if(SpaceShip2.Y >= GraphicsDevice.Viewport.Height-100) {
+                    IsJump = false;
+                    Velocity.Y = 0;
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -98,7 +118,7 @@ namespace Mongame_start1
 
                 
             _spriteBatch.Draw(TextureSpaceShip, SpaceShip, Color.White);
-            _spriteBatch.Draw(TextureSpaceShip, SpaceShip2, Color.White);
+            _spriteBatch.Draw(TextureSpaceShip, SpaceShip2, Color.Blue);
 
             _spriteBatch.DrawString(Font, "Points " + points, new Vector2(120, 20), Color.White);
 
