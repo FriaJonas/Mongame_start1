@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Mongame_start1
@@ -12,8 +14,13 @@ namespace Mongame_start1
 
         private Texture2D TextureBg;
 
-        //Skeppet - En grafikvaiabel och en raktangle
+        //Skeppet - En grafikvaiabel och en rektangle
         private Texture2D TextureSpaceShip;
+
+        //Grafiken för skottet
+        private Texture2D TextureShot;
+
+        private List<Vector2> shots = new();
 
         private Rectangle SpaceShip;
 
@@ -54,6 +61,7 @@ namespace Mongame_start1
 
             TextureBg = Content.Load<Texture2D>("bgspace");
             TextureSpaceShip = Content.Load<Texture2D>("SpaceShip");
+            TextureShot = Content.Load<Texture2D>("shot");
 
             //Laddar in fonten
             Font = Content.Load<SpriteFont>("Font");
@@ -93,8 +101,10 @@ namespace Mongame_start1
                 points++;
             }
             if (ks.IsKeyDown(Keys.Space)){
-                IsJump = true;
-                Velocity.Y = -10;
+                //IsJump = true;
+                //Velocity.Y = -10;
+                Vector2 r = new Vector2(SpaceShip.X + 50, SpaceShip.Y);
+                shots.Add(r);
             }
             if (IsJump)
             {
@@ -108,6 +118,12 @@ namespace Mongame_start1
                     Velocity.Y = 0;
                 }
             }
+            List<Vector2> newList = new List<Vector2>();
+            foreach(Vector2 v in shots)
+            {
+                newList.Add(new Vector2(v.X, v.Y-10));
+            }
+            shots= newList;
             base.Update(gameTime);
         }
 
@@ -119,7 +135,10 @@ namespace Mongame_start1
                 
             _spriteBatch.Draw(TextureSpaceShip, SpaceShip, Color.White);
             _spriteBatch.Draw(TextureSpaceShip, SpaceShip2, Color.Blue);
-
+            foreach(var shot in shots)
+            {
+                _spriteBatch.Draw(TextureShot, shot, Color.White);
+            }
             _spriteBatch.DrawString(Font, "Points " + points, new Vector2(120, 20), Color.White);
 
             _spriteBatch.End();
