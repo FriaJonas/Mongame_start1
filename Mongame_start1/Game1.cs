@@ -9,6 +9,7 @@ namespace Mongame_start1
 {
     public class Game1 : Game
     {
+        int delay = 0;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -20,7 +21,7 @@ namespace Mongame_start1
         //Grafiken för skottet
         private Texture2D TextureShot;
 
-        private List<Vector2> shots = new();
+        private List<Rectangle> shots = new();
 
         private Rectangle SpaceShip;
 
@@ -69,12 +70,13 @@ namespace Mongame_start1
 
 
             SpaceShip = new Rectangle(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 600, 100, 100);
-            SpaceShip2 = new Rectangle(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 100, 100, 100);
+            SpaceShip2 = new Rectangle(_graphics.PreferredBackBufferWidth / 2, 200, 100, 100);
             // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
+            delay++;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -100,11 +102,12 @@ namespace Mongame_start1
             {
                 points++;
             }
-            if (ks.IsKeyDown(Keys.Space)){
+            if (ks.IsKeyDown(Keys.Space)&&delay>60){
                 //IsJump = true;
                 //Velocity.Y = -10;
-                Vector2 r = new Vector2(SpaceShip.X + 50, SpaceShip.Y);
+                Rectangle r = new Rectangle(SpaceShip.X + 50, SpaceShip.Y,100,100);
                 shots.Add(r);
+                delay= 0;
             }
             if (IsJump)
             {
@@ -118,10 +121,14 @@ namespace Mongame_start1
                     Velocity.Y = 0;
                 }
             }
-            List<Vector2> newList = new List<Vector2>();
-            foreach(Vector2 v in shots)
+            List<Rectangle> newList = new List<Rectangle>();
+            foreach(Rectangle v in shots)
             {
-                newList.Add(new Vector2(v.X, v.Y-10));
+                newList.Add(new Rectangle(v.X, v.Y-10,10,10));
+                if(v.Intersects(SpaceShip2))
+                {
+                    points++;
+                }
             }
             shots= newList;
             base.Update(gameTime);
