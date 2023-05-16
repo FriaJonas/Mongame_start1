@@ -124,11 +124,18 @@ namespace Mongame_start1
             List<Rectangle> newList = new List<Rectangle>();
             foreach(Rectangle v in shots)
             {
-                newList.Add(new Rectangle(v.X, v.Y-10,10,10));
-                if(v.Intersects(SpaceShip2))
+                Rectangle newR = new Rectangle(v.X, v.Y - 10, 10, 10);
+                if (v.Intersects(SpaceShip2))
                 {
                     points++;
+                    delay= 60;
                 }
+                else
+                {
+                    newList.Add(newR);
+                }
+                
+                
             }
             shots= newList;
             base.Update(gameTime);
